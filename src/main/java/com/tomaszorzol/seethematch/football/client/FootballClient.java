@@ -41,9 +41,13 @@ public class FootballClient {
                 .header("X-RapidAPI-Key", footballConfig.getApiKey())
                 .asJson();
         try {
-            for (Object team : findObjectsInTeamResponse(response)) {
-                TeamDto teamDto = mapper.readValue(team.toString(), TeamDto.class);
-                result.add(teamDto);
+            JSONArray teams = response.getBody().getObject().getJSONArray("response");
+            for (int i = 0; i < teams.length(); i++) {
+                JSONObject team = teams.getJSONObject(i).getJSONObject("team");
+                JSONObject venue = teams.getJSONObject(i).getJSONObject("venue");
+                result.add(mapper.readValue(team.toString(), TeamDto.class));
+                result.get(i).setCity(mapper.readValue(venue.toString(), TeamDto.class).getCity());
+
             }
             return result;
         } catch (JSONException e) {
@@ -134,8 +138,8 @@ public class FootballClient {
     }
 
     private JSONArray findObjectsInTeamResponse(HttpResponse<JsonNode> response) {
-        JSONObject myObj = response.getBody().getObject();
-        return myObj.getJSONArray("response");
+        return response.getBody().getObject().getJSONArray("response");
+
     }
 
     private JSONArray findObjectsInLeagueResponse(HttpResponse<JsonNode> response) {

@@ -13,11 +13,11 @@ import javax.persistence.*;
 public class Team {
     @Id
     @Column
-    private long team_id;
+    private long id;
     @Column
     private String name;
     @Column
     private String country;
     @Column
-    private String venueCity;
+    private String city;
 }

@@ -5,20 +5,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TeamDto {
     @Id
-    @JsonProperty("team_id")
-    private long team_id;
+    @JsonProperty("id")
+    private long id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("country")
     private String country;
-    @JsonProperty("venue_city")
-    private String venueCity;
+    @JsonProperty("city")
+    private String city;
+
 }

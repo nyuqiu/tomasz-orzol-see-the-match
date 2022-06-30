@@ -11,23 +11,23 @@ import java.util.stream.Collectors;
 public class TeamMapper {
     public Team mapToTeam(final TeamDto teamDto) {
         return new Team(
-                teamDto.getTeam_id(),
+                teamDto.getId(),
                 teamDto.getName(),
                 teamDto.getCountry(),
-                teamDto.getVenueCity());
+                teamDto.getCity());
     }
 
     public TeamDto mapToTeamDto(final Team team) {
         return new TeamDto(
-                team.getTeam_id(),
+                team.getId(),
                 team.getName(),
                 team.getCountry(),
-                team.getVenueCity());
+                team.getCity());
     }
 
     public List<TeamDto> mapToTeamDtoList(final List<Team> teamList){
         return teamList.stream()
-                .map(t -> new TeamDto(t.getTeam_id(), t.getName(), t.getCountry(), t.getVenueCity()))
+                .map(t -> new TeamDto(t.getId(), t.getName(), t.getCountry(), t.getCity()))
                 .collect(Collectors.toList());
     }
 }
