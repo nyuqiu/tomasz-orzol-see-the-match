@@ -49,8 +49,9 @@ public class LeagueController {
     }
 
     @PostMapping(value = "teams/{id}")
-    public void saveTeamsFromLeagues(@PathVariable("id") Long leagueId) throws UnirestException, IOException {
-        List<TeamDto> teams = footballController.fetchTeamsFromLeagues(leagueId);
+    public void saveTeamsFromLeagues(@PathVariable("id") Long leagueId, @PathVariable("season") Long season)
+            throws UnirestException, IOException {
+        List<TeamDto> teams = footballController.fetchTeamsFromLeagues(leagueId, season);
         teams.forEach(n-> teamService.saveTeam(teamMapper.mapToTeam(n)));
     }
 

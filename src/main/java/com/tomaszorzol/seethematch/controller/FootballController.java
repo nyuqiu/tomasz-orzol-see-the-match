@@ -33,9 +33,10 @@ public class FootballController {
         return footballClient.getLeagueFromApi(leagueId);
     }
 
-    @GetMapping(value = "/fromleague/{id}")
-    public List<TeamDto> fetchTeamsFromLeagues(@PathVariable("id") Long leagueId) throws UnirestException, IOException {
-        return footballClient.getTeamsFromApi(leagueId);
+    @GetMapping(value = "/fromleague/{id}/{season}")
+    public List<TeamDto> fetchTeamsFromLeagues(@PathVariable("id") Long leagueId, @PathVariable("season") Long season)
+            throws UnirestException, IOException {
+        return footballClient.getTeamsFromApi(leagueId, season);
     }
 
     @GetMapping(value = "/team/{id}")

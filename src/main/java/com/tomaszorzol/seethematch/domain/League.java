@@ -2,12 +2,14 @@ package com.tomaszorzol.seethematch.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Entity
 public class League {
