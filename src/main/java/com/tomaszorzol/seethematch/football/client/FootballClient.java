@@ -41,12 +41,9 @@ public class FootballClient {
                 .header("X-RapidAPI-Key", footballConfig.getApiKey())
                 .asJson();
         try {
-            JSONArray jsonTeams = response.getBody().getObject().getJSONArray("response");
+            JSONArray jsonTeams = findObjectsInTeamResponse(response);
             for (int i = 0; i < jsonTeams.length(); i++) {
-                JSONObject jsonTeam = jsonTeams.getJSONObject(i);
-                result.add(mapperForTeam(jsonTeam, "team"));
-                result.get(i).setCity(mapperForTeam(jsonTeam, "venue").getCity());
-
+                result.add(createTeamFromJsonResponse(jsonTeams.getJSONObject(i)));
             }
             return result;
         } catch (JSONException e) {
@@ -55,16 +52,17 @@ public class FootballClient {
         }
     }
 
-    public TeamDto getTeamFromApi(final Long teamId) throws UnirestException, IOException {
+    public TeamDto getTeamFromApi(final Long leagueId, final Long season, final Long teamId)
+            throws UnirestException, IOException {
 
-        HttpResponse<JsonNode> response = Unirest.get(footballConfig.getApiFootballEndpoint() + "/v2/teams/team/" + teamId)
+        HttpResponse<JsonNode> response = Unirest.get(footballConfig.getApiFootballEndpoint() +
+                        "/v3/teams?id=" + teamId + "&league=" + leagueId + "&season=" + season)
                 .header("X-RapidAPI-Host", footballConfig.getHost())
                 .header("X-RapidAPI-Key", footballConfig.getApiKey())
                 .asJson();
 
         try {
-            JSONObject team = findObjectsInTeamResponse(response).getJSONObject(0);
-            return mapper.readValue(team.toString(), TeamDto.class);
+            return createTeamFromJsonResponse(findObjectsInTeamResponse(response).getJSONObject(0));
         } catch (JSONException e) {
             LOGGER.error(e.getMessage(), e);
             return new TeamDto();
@@ -138,7 +136,6 @@ public class FootballClient {
 
     private JSONArray findObjectsInTeamResponse(HttpResponse<JsonNode> response) {
         return response.getBody().getObject().getJSONArray("response");
-
     }
 
     private JSONArray findObjectsInLeagueResponse(HttpResponse<JsonNode> response) {
@@ -149,6 +146,12 @@ public class FootballClient {
 
     private TeamDto mapperForTeam(JSONObject jsonTeam, String teamOrVenue) throws IOException {
         return mapper.readValue(jsonTeam.get(teamOrVenue).toString(), TeamDto.class);
+    }
+
+    private TeamDto createTeamFromJsonResponse(JSONObject jsonTeam) throws IOException {
+        TeamDto result = mapperForTeam(jsonTeam, "team");
+        result.setCity(mapperForTeam(jsonTeam, "venue").getCity());
+        return result;
     }
 
 

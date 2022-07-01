@@ -33,19 +33,22 @@ public class FootballController {
         return footballClient.getLeagueFromApi(leagueId);
     }
 
-    @GetMapping(value = "/fromleague/{id}/{season}")
+    @GetMapping(value = "/fromleague/{leagueId}/{season}")
     public List<TeamDto> fetchTeamsFromLeagues(@PathVariable("id") Long leagueId, @PathVariable("season") Long season)
             throws UnirestException, IOException {
         return footballClient.getTeamsFromApi(leagueId, season);
     }
 
-    @GetMapping(value = "/team/{id}")
-    public TeamDto fetchTeam(@PathVariable("id") Long leagueId) throws UnirestException, IOException {
-        return footballClient.getTeamFromApi(leagueId);
+    @GetMapping(value = "/team/{leagueId}/{season}/{teamId}")
+    public TeamDto fetchTeam(@PathVariable("leagueId") Long leagueId, @PathVariable("season") Long season,
+                             @PathVariable("teamId") Long teamId)
+            throws UnirestException, IOException {
+        return footballClient.getTeamFromApi(leagueId, season,  teamId);
     }
 
     @GetMapping(value = "/{leagueId}/{teamId}")
-    public TeamStatisticsDto fetchTeamStatistics(@PathVariable("leagueId") Long leagueId, @PathVariable("teamId") Long teamId) throws UnirestException, IOException {
+    public TeamStatisticsDto fetchTeamStatistics(@PathVariable("leagueId") Long leagueId, @PathVariable("teamId") Long teamId)
+            throws UnirestException, IOException {
         return footballClient.getStatisticsFromApi(leagueId, teamId);
     }
 
