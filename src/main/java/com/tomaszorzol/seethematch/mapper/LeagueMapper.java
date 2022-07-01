@@ -22,7 +22,7 @@ public class LeagueMapper {
 
     public LeagueDto mapToLeagueDto(final League league) {
         return new LeagueDto(
-                league.getLeague_id(),
+                league.getId(),
                 league.getName(),
                 league.getCountry(),
                 league.getSeason(),
@@ -32,7 +32,7 @@ public class LeagueMapper {
 
     public List<LeagueDto> mapToLeagueDtoList(final List<League> leagueList){
         return leagueList.stream()
-                .map(t -> new LeagueDto(t.getLeague_id(), t.getName(), t.getCountry(), t.getSeason(), t.getSeasonStart(), t.getSeasonEnd()))
+                .map(t -> new LeagueDto(t.getId(), t.getName(), t.getCountry(), t.getSeason(), t.getSeasonStart(), t.getSeasonEnd()))
                 .collect(Collectors.toList());
     }
 
