@@ -41,12 +41,11 @@ public class FootballClient {
                 .header("X-RapidAPI-Key", footballConfig.getApiKey())
                 .asJson();
         try {
-            JSONArray teams = response.getBody().getObject().getJSONArray("response");
-            for (int i = 0; i < teams.length(); i++) {
-                JSONObject team = teams.getJSONObject(i).getJSONObject("team");
-                JSONObject venue = teams.getJSONObject(i).getJSONObject("venue");
-                result.add(mapper.readValue(team.toString(), TeamDto.class));
-                result.get(i).setCity(mapper.readValue(venue.toString(), TeamDto.class).getCity());
+            JSONArray jsonTeams = response.getBody().getObject().getJSONArray("response");
+            for (int i = 0; i < jsonTeams.length(); i++) {
+                JSONObject jsonTeam = jsonTeams.getJSONObject(i);
+                result.add(mapperForTeam(jsonTeam, "team"));
+                result.get(i).setCity(mapperForTeam(jsonTeam, "venue").getCity());
 
             }
             return result;
@@ -146,6 +145,10 @@ public class FootballClient {
         JSONObject myObj = response.getBody().getObject();
         JSONObject api = myObj.getJSONObject("api");
         return api.getJSONArray("leagues");
+    }
+
+    private TeamDto mapperForTeam(JSONObject jsonTeam, String teamOrVenue) throws IOException {
+        return mapper.readValue(jsonTeam.get(teamOrVenue).toString(), TeamDto.class);
     }
 
 
