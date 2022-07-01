@@ -15,7 +15,7 @@ import javax.persistence.Id;
 public class League {
     @Id
     @Column
-    private long league_id;
+    private long id;
     @Column
     private String name;
     @Column
