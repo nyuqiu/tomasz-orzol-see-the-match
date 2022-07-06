@@ -3,6 +3,7 @@ package com.tomaszorzol.seethematch.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 public class League {
     @Id
@@ -21,10 +23,10 @@ public class League {
     @Column
     private String country;
     @Column
-    private String season;
-    @Column(name = "season_start")
-    private String seasonStart;
-    @Column(name = "season_end")
-    private String seasonEnd;
+    private String year;
+    @Column
+    private String start;
+    @Column
+    private String end;
 
 }

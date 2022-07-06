@@ -137,8 +137,12 @@ public class FootballClient {
         return response.getBody().getObject().getJSONArray("response");
     }
 
-    private TeamDto mapperForTeam(JSONObject jsonTeam, String teamOrVenue) throws IOException {
-        return mapper.readValue(jsonTeam.get(teamOrVenue).toString(), TeamDto.class);
+    private TeamDto mapperForTeam(JSONObject jsonTeam, String objectsInJson) throws IOException {
+        return mapper.readValue(jsonTeam.get(objectsInJson).toString(), TeamDto.class);
+    }
+
+    private LeagueDto mapperForLeague(JSONObject jsonLeague, String objectsInJson) throws IOException {
+        return mapper.readValue(jsonLeague.get(objectsInJson).toString(), LeagueDto.class);
     }
 
     private TeamDto createTeamFromJsonResponse(JSONObject jsonTeam) throws IOException {
@@ -147,5 +151,10 @@ public class FootballClient {
         return result;
     }
 
-
+    private LeagueDto createLeagueFromJsonResponse(JSONObject jsonLeague) throws IOException {
+        LeagueDto result = mapperForLeague(jsonLeague, "league");
+        result.setCountry(mapperForTeam(jsonLeague, "country").getCountry());
+        result.setStart(mapperForLeague(jsonLeague, "seasons").getStart()); //TODO: get data from first object in array
+        return result;
+    }
 }

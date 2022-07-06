@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 public class LeagueMapper {
     public League mapToLeague(final LeagueDto leagueDto) {
         return new League(
-                leagueDto.getLeague_id(),
+                leagueDto.getId(),
                 leagueDto.getName(),
                 leagueDto.getCountry(),
-                leagueDto.getSeason(),
-                leagueDto.getSeasonStart(),
-                leagueDto.getSeasonEnd());
+                leagueDto.getYear(),
+                leagueDto.getStart(),
+                leagueDto.getEnd());
     }
 
     public LeagueDto mapToLeagueDto(final League league) {
@@ -25,14 +25,14 @@ public class LeagueMapper {
                 league.getId(),
                 league.getName(),
                 league.getCountry(),
-                league.getSeason(),
-                league.getSeasonStart(),
-                league.getSeasonEnd());
+                league.getYear(),
+                league.getStart(),
+                league.getEnd());
     }
 
     public List<LeagueDto> mapToLeagueDtoList(final List<League> leagueList){
         return leagueList.stream()
-                .map(t -> new LeagueDto(t.getId(), t.getName(), t.getCountry(), t.getSeason(), t.getSeasonStart(), t.getSeasonEnd()))
+                .map(t -> new LeagueDto(t.getId(), t.getName(), t.getCountry(), t.getYear(), t.getStart(), t.getEnd()))
                 .collect(Collectors.toList());
     }
 
