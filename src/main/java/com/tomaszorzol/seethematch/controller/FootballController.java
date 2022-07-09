@@ -2,6 +2,7 @@ package com.tomaszorzol.seethematch.controller;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.tomaszorzol.seethematch.domain.Dto.LeagueDto;
+import com.tomaszorzol.seethematch.domain.Dto.league.LeagueFromApiDto;
 import com.tomaszorzol.seethematch.domain.Dto.TeamStatisticsDto;
 import com.tomaszorzol.seethematch.domain.Dto.TeamDto;
 import com.tomaszorzol.seethematch.football.client.FootballClient;
@@ -23,13 +24,14 @@ public class FootballController {
     @Autowired
     private FootballClient footballClient;
 
-    @GetMapping()
-    public List<LeagueDto> fetchLeagues() throws UnirestException, IOException {
-        return footballClient.getLeaguesFromApi();
+    @GetMapping(value = "/leagues/{country}/{season}")
+    public List<LeagueDto> fetchLeagues(@PathVariable("country") String country, @PathVariable("season") Long season)
+                                        throws UnirestException, IOException {
+        return footballClient.getLeaguesFromApi(country, season);
     }
 
     @GetMapping(value = "/league/{id}")
-    public LeagueDto fetchLeague(@PathVariable("id") Long leagueId) throws UnirestException, IOException {
+    public LeagueFromApiDto fetchLeague(@PathVariable("id") Long leagueId) throws UnirestException, IOException {
         return footballClient.getLeagueFromApi(leagueId);
     }
 
