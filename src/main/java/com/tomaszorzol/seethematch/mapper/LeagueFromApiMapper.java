@@ -12,17 +12,17 @@ public class LeagueFromApiMapper {
                 leagueArrayFromApi.getLeague().getId(),
                 leagueArrayFromApi.getLeague().getName(),
                 leagueArrayFromApi.getCountry().getCountry(),
-                leagueArrayFromApi.getSeasons().getSeasons().get(0).getYear(),
-                leagueArrayFromApi.getSeasons().getSeasons().get(0).getStart(),
-                leagueArrayFromApi.getSeasons().getSeasons().get(0).getEnd());
+                leagueArrayFromApi.getSeasons().get(0).getYear(),
+                leagueArrayFromApi.getSeasons().get(0).getStart(),
+                leagueArrayFromApi.getSeasons().get(0).getEnd());
     }
     public LeagueDto mapToLeagueDto(final LeagueArrayFromApiDto leagueArrayFromApi) {
         return new LeagueDto(
                 leagueArrayFromApi.getLeague().getId(),
                 leagueArrayFromApi.getLeague().getName(),
                 leagueArrayFromApi.getCountry().getCountry(),
-                leagueArrayFromApi.getSeasons().getSeasons().get(0).getYear(),
-                leagueArrayFromApi.getSeasons().getSeasons().get(0).getStart(),
-                leagueArrayFromApi.getSeasons().getSeasons().get(0).getEnd());
+                leagueArrayFromApi.getSeasons().get(0).getYear(),
+                leagueArrayFromApi.getSeasons().get(0).getStart(),
+                leagueArrayFromApi.getSeasons().get(0).getEnd());
     }
 }

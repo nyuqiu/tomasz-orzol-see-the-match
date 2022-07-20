@@ -13,8 +13,6 @@ import lombok.Setter;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CountryFromApiDto {
-    @JsonProperty("country")
+    @JsonProperty("name")
     private String country;
-    @JsonProperty("code")
-    private String code;
 }

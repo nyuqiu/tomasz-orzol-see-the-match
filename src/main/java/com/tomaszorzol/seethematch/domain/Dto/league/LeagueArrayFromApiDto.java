@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -15,8 +17,8 @@ import lombok.Setter;
 public class LeagueArrayFromApiDto {
     @JsonProperty("league")
     private LeagueFromApiDto league;
-    @JsonProperty("coutry")
+    @JsonProperty("country")
     private CountryFromApiDto country;
     @JsonProperty("seasons")
-    private SeasonsFromApiDto seasons;
+    private List<SeasonFromApiDto> seasons;
 }

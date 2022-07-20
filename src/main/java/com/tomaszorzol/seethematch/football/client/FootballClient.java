@@ -75,9 +75,6 @@ public class FootballClient {
         }
     }
 
-    //TODO: com.fasterxml.jackson.databind.exc.MismatchedInputException: Cannot deserialize instance of
-    // `com.tomaszorzol.seethematch.domain.Dto.league.SeasonsFromApiDto` out of START_ARRAY token
-    // to fix
     public List<LeagueDto> getLeaguesFromApi(String country, Long season) throws UnirestException, IOException {
         List<LeagueDto> result = new ArrayList<>();
 
@@ -88,9 +85,7 @@ public class FootballClient {
                 .asJson();
         try {
             for (Object league : findObjectsInResponse(response)) {
-                LeagueArrayFromApiDto leagueArrayFromApiDto = mapper.readValue(league.toString(), LeagueArrayFromApiDto.class);
-                LeagueDto leagueDto = leagueFromApiMapper.mapToLeagueDto(leagueArrayFromApiDto);
-                result.add(leagueDto);
+                result.add(readAndMapLeagueArray((JSONObject) league));
             }
             return result;
         } catch (JSONException e) {
@@ -99,20 +94,23 @@ public class FootballClient {
         }
     }
 
-    public LeagueFromApiDto getLeagueFromApi(final Long leagueId) throws UnirestException, IOException {
+    public LeagueDto getLeagueFromApi(final Long leagueId) throws UnirestException, IOException {
+
 
         HttpResponse<JsonNode> response = Unirest.get(footballConfig.getApiFootballEndpoint() + "/v3/leagues?id=" + leagueId)
                 .header("X-RapidAPI-Host", footballConfig.getHost())
                 .header("X-RapidAPI-Key", footballConfig.getApiKey())
                 .asJson();
+        System.out.println(response.getBody().toString());
 
         try {
-            JSONObject league = findObjectsInResponse(response).getJSONObject(0);
-            return mapper.readValue(league.toString(), LeagueFromApiDto.class);
+            JSONObject jsonLeague = response.getBody().getObject().getJSONArray("response").getJSONObject(0);
+            return readAndMapLeagueArray(jsonLeague);
         } catch (JSONException e) {
             LOGGER.error(e.getMessage(), e);
-            return new LeagueFromApiDto();
+            return new LeagueDto();
         }
+
     }
 
     public TeamStatisticsDto getStatisticsFromApi(final Long leagueId, final Long teamId) throws UnirestException, IOException {
@@ -162,10 +160,8 @@ public class FootballClient {
         return result;
     }
 
-    private LeagueFromApiDto createLeagueFromJsonResponse(JSONObject jsonLeague) throws IOException {
-        LeagueFromApiDto result = mapperForLeague(jsonLeague, "league");
-//        result.setCountry(mapperForTeam(jsonLeague, "country").getCountry());
-//        result.setStart(mapperForLeague(jsonLeague, "seasons").getStart());
-        return result;
+    private LeagueDto readAndMapLeagueArray(JSONObject jsonLeague) throws IOException {
+        LeagueArrayFromApiDto leagueArrayFromApiDto = mapper.readValue(jsonLeague.toString(), LeagueArrayFromApiDto.class);
+        return leagueFromApiMapper.mapToLeagueDto(leagueArrayFromApiDto);
     }
 }
