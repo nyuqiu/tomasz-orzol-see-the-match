@@ -36,7 +36,8 @@ public class TeamStatisticController {
 
     @GetMapping(value = "{id}")
     public TeamStatisticsDto getTeamStatistic(@PathVariable("id") Long teamStatisticId) throws TeamStatisticNotFoundException {
-        return teamStatisticMapper.mapToTeamStatisticDto(teamStatisticService.getTeamStatistic(teamStatisticId).orElseThrow(TeamStatisticNotFoundException::new));
+        return teamStatisticMapper.mapToTeamStatisticDto(teamStatisticService.getTeamStatistic(teamStatisticId)
+                .orElseThrow(TeamStatisticNotFoundException::new));
     }
 
     @PostMapping(value = "{id}")
@@ -44,9 +45,11 @@ public class TeamStatisticController {
         teamStatisticService.saveTeamStatistic(teamStatisticMapper.mapToTeamStatistic(teamStatisticsDto));
     }
 
-    @PostMapping(value = "/{leagueId}/{teamStatisticId}")
-    public void saveStatisticsFromApi(@PathVariable("leagueId") Long leagueId, @PathVariable("teamStatisticId") Long teamStatisticId) throws UnirestException, IOException {
-        TeamStatisticsDto teamStatistics = footballController.fetchTeamStatistics(leagueId ,teamStatisticId);
+    @PostMapping(value = "/{leagueId}/{season}/{teamStatisticId}")
+    public void saveStatisticsFromApi(@PathVariable("leagueId") Long leagueId,@PathVariable("season") Long season,
+                                      @PathVariable("teamStatisticId") Long teamStatisticId)
+            throws UnirestException, IOException {
+        TeamStatisticsDto teamStatistics = footballController.fetchTeamStatistics(leagueId , season,teamStatisticId);
         teamStatisticService.saveTeamStatistic(teamStatisticMapper.mapToTeamStatistic(teamStatistics));
     }
 
