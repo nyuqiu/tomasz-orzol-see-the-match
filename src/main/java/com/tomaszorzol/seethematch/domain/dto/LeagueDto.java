@@ -1,4 +1,4 @@
-package com.tomaszorzol.seethematch.domain.Dto;
+package com.tomaszorzol.seethematch.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,18 +11,18 @@ import org.springframework.data.annotation.Id;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @ToString
-public class TeamStatisticsDto {
+public class LeagueDto {
     @Id
     @JsonProperty("id")
-    private long team_id;
+    private long id;
     @JsonProperty("name")
     private String name;
-    @JsonProperty("total_matches")
-    private int totalMatchesPlayed;
-    @JsonProperty("total_goals")
-    private double goalsFor;
-    @JsonProperty("goals_against")
-    private double goalsAgainst;
-    @JsonProperty("goal_average")
-    private double goalsAvg;
+    @JsonProperty("country")
+    private String country;
+    @JsonProperty("year")
+    private String year;
+    @JsonProperty("start")
+    private String start;
+    @JsonProperty("end")
+    private String end;
 }

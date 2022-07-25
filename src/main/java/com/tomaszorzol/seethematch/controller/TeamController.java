@@ -1,7 +1,7 @@
 
 package com.tomaszorzol.seethematch.controller;
 
-import com.tomaszorzol.seethematch.domain.Dto.TeamDto;
+import com.tomaszorzol.seethematch.domain.dto.TeamDto;
 import com.tomaszorzol.seethematch.exception.TeamNotFoundException;
 import com.tomaszorzol.seethematch.mapper.TeamMapper;
 import com.tomaszorzol.seethematch.service.TeamService;

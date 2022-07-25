@@ -1,6 +1,6 @@
 package com.tomaszorzol.seethematch.mapper;
 
-import com.tomaszorzol.seethematch.domain.Dto.TeamDto;
+import com.tomaszorzol.seethematch.domain.dto.TeamDto;
 import com.tomaszorzol.seethematch.domain.Team;
 import org.springframework.stereotype.Component;
 

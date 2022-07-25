@@ -1,8 +1,8 @@
-package com.tomaszorzol.seethematch.domain.Dto;
+package com.tomaszorzol.seethematch.domain.dto;
 
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.tomaszorzol.seethematch.domain.Dto.league.LeagueFromApiDto;
+import com.tomaszorzol.seethematch.domain.dto.league.LeagueFromApiDto;
 import com.tomaszorzol.seethematch.football.client.FootballClient;
 import org.junit.Test;
 import org.junit.runner.RunWith;

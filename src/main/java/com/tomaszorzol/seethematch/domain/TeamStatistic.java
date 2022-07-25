@@ -17,6 +17,8 @@ public class TeamStatistic {
     @Column
     private long team_id;
     @Column
+    private String name;
+    @Column
     private int totalMatchesPlayed;
     @Column
     private double goalsFor;

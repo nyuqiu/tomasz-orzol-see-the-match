@@ -1,7 +1,7 @@
 package com.tomaszorzol.seethematch.mapper;
 
-import com.tomaszorzol.seethematch.domain.Dto.LeagueDto;
-import com.tomaszorzol.seethematch.domain.Dto.league.LeagueArrayFromApiDto;
+import com.tomaszorzol.seethematch.domain.dto.LeagueDto;
+import com.tomaszorzol.seethematch.domain.dto.league.LeagueArrayFromApiDto;
 import com.tomaszorzol.seethematch.domain.League;
 import org.springframework.stereotype.Component;
 

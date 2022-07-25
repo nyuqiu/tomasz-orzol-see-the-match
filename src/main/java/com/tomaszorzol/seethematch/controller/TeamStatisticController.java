@@ -1,7 +1,7 @@
 package com.tomaszorzol.seethematch.controller;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.tomaszorzol.seethematch.domain.Dto.TeamStatisticsDto;
+import com.tomaszorzol.seethematch.domain.dto.TeamStatisticsDto;
 import com.tomaszorzol.seethematch.exception.TeamStatisticNotFoundException;
 import com.tomaszorzol.seethematch.mapper.TeamStatisticMapper;
 import com.tomaszorzol.seethematch.service.TeamStatisticService;

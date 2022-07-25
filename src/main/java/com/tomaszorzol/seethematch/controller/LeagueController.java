@@ -1,9 +1,8 @@
 package com.tomaszorzol.seethematch.controller;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.tomaszorzol.seethematch.domain.Dto.LeagueDto;
-import com.tomaszorzol.seethematch.domain.Dto.league.LeagueFromApiDto;
-import com.tomaszorzol.seethematch.domain.Dto.TeamDto;
+import com.tomaszorzol.seethematch.domain.dto.LeagueDto;
+import com.tomaszorzol.seethematch.domain.dto.TeamDto;
 import com.tomaszorzol.seethematch.exception.LeagueNotFoundException;
 import com.tomaszorzol.seethematch.mapper.LeagueMapper;
 import com.tomaszorzol.seethematch.mapper.TeamMapper;
